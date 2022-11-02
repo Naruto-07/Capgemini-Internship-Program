@@ -1,0 +1,274 @@
+1.
+import java.util.*;
+import java.util.ArrayList;
+class ArrayListOps {
+	public ArrayList<Integer> makeArrayListInt(int n){
+		return new ArrayList<Integer>(Collections.nCopies(n,0));
+	}
+	public ArrayList<Integer> reverseList(ArrayList<Integer> list){
+		Collections.reverse(list);
+		return list;
+	}
+	public ArrayList<Integer> changeList(ArrayList<Integer> list, int m, int n){
+		for(int i=0;i<list.size();i++){
+			if(list.get(i)==m) list.set(i,n);
+		}
+		return list;
+	}
+   
+}
+public class Source{
+	public static void main(String[] args) {
+		ArrayListOps op=new ArrayListOps();
+		ArrayList list=op.makeArrayListInt(5);
+		System.out.println(list);
+		list=op.reverseList(list);
+		System.out.println(list);
+		list=op.changeList(list,0,2);
+		System.out.println(list);
+	}
+}
+
+------------------------------------------------------------------------------------------
+
+2.
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Mobile{
+    // Write your code here..
+	HashMap<String, ArrayList<String>> mobiles = new HashMap<>();
+	public String addMobile(String company, String model){
+		if(mobiles.containsKey(company)){
+			ArrayList<String> temp=mobiles.get(company);
+			temp.add(model);
+			mobiles.put(company,temp);
+		}
+		else{
+			ArrayList<String> temp=new ArrayList();
+			temp.add(model);
+			mobiles.put(company,temp);
+		}
+		return "model successfully added";
+	}
+	public ArrayList<String> getModels(String company){
+		
+		if(mobiles.containsKey(company)){
+			ArrayList<String> temp=mobiles.get(company);
+			return temp;
+		}
+		else{
+			return null;
+		}
+	}
+	public String buyMobile(String company, String model){
+		if(mobiles.containsKey(company)){
+			ArrayList<String> temp=mobiles.get(company);
+			if(temp.contains(model)){
+				temp.remove(model);
+				mobiles.put(company,temp);
+				return "mobile sold successfully";
+			}
+			else return "item not available";
+		}
+		else{
+			return "item not available";
+		}
+		
+	}
+}
+
+public class Source {
+	public static void main(String args[] ) throws Exception {
+		/* Enter your code here. Read input from STDIN. Print output to STDOUT */
+		Mobile obj = new Mobile();
+		obj.addMobile("Oppo", "K3");
+		obj.getModels("Oppo");
+		obj.buyMobile("Oppo", "K3");
+	}
+}
+
+------------------------------------------------------------------------------------------------
+3.
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Activity{
+  //Implement Activity class here..
+  String string1;
+  String string2;
+  String operator;
+
+  Activity(String string1,String string2,String operator){
+    this.string1=string1;
+    this.string2=string2;
+    this.operator=operator;
+  }
+  Activity(){}
+}
+
+public class Source {
+  //Implement the two function given in description in here...
+  public String handleException(Activity a){
+    if(a.string1==null||a.string2==null) return "Null values found";
+    if(a.operator!="+"&&a.operator!="-") return a.operator;
+    return "No Exception Found";
+  }
+  public String doOperation(Activity a) {
+    String op=a.operator;
+      switch(op){
+        case "+" :
+          a.string1+=a.string2;
+          break;
+        case "-" :
+          // if(a.string1.contain(a.string2)) a.string1.replaceAll(a.string1,"");
+          break;
+        default :
+          break;
+      }
+      return a.string1;
+  }
+	public static void main(String args[] ) throws Exception {
+    //Write your own main to check the program...
+    Source src=new Source();
+    Activity act=new Activity("hello","world","+");
+    src.handleException(act);
+    src.doOperation(act);
+    
+	}
+}
+------------------------------------------------------------------------------------------------------
+4.
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class CompanyJobRepository {
+	static String getJobPrediction(int age, String highestQualification) throws NotEligibleException{
+		if(age<19) throw new NotEligibleException("You are underage for any job");
+		if(age>=21&&highestQualification=="B.E") return "We have openings for junior developer";
+		if(age>=26&&highestQualification=="M.S"||highestQualification=="PhD") return "We have openings for senior developer";
+		if(age>=19) throw new NotEligibleException("We do not have any job that matches your qualifications");
+		return "Sorry we have no openings for now";
+	}
+      
+}
+
+public class Source {
+	public String searchForJob(int age, String highestQualification) throws NotEligibleException{
+		if(age>=200||age<=0) throw new NotEligibleException( "The age entered is not typical for a human being");
+		try{
+			return CompanyJobRepository.getJobPrediction(age,highestQualification);
+		}
+		catch(NotEligibleException e){
+			return e.getMessage();
+		}
+	}
+	public static void main(String args[] )  {
+		/* Enter your code here. Read input from STDIN. Print output to STDOUT */
+		Source src=new Source();
+		try{
+			src.searchForJob(1,"B.E");
+		}
+		catch(NotEligibleException e){
+			System.out.println(e.getMessage());
+		}
+	}
+}
+class NotEligibleException extends Exception {
+	public NotEligibleException(String message){
+		super(message);
+	}
+}
+
+------------------------------------------------------------------------------------------------------
+7.
+
+class Email{
+	// Implement Email Class according to the specifiaction.
+	Header header;
+	String body;
+	String greetings;
+	Email(Header header,String body,String greetings){
+		this.header=header;
+		this.body=body;
+		this.greetings=greetings;
+	}
+	Email(){}
+}
+class Header{
+	// Implemet the Header Class according to the specifiaction.
+	String from;
+	String to;
+	Header(String from,String to){
+		this.from=from;
+		this.to=to;
+	}
+
+}
+class EmailOperations{
+	// Implemet the Three methods specified in the specified.
+	public String emailVerify(Email e){
+		char firstChar=e.header.from.charAt(0);
+		if(firstChar=='_'||)
+	}
+	public String bodyEncryption(Email e){
+		String body=e.body;
+		String ans="";
+		for(int i=0;i<body.size();i++){
+			ans+=body.charAt(i)-
+		}
+	}		
+	public String greetingMessage(Email e){
+
+	}
+}
+public class Source {
+	public static void main(String args[] ) throws Exception {
+		/* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    	// You can Implement your main() to check your Program.
+
+-------------------------------------------------------------------------------------------------
+8.
+class TransactionParty {
+  String seller;
+  String buyer;
+  public TransactionParty(String seller, String buyer){
+    this.seller=seller;
+    this.buyer=buyer;
+  }
+  public TransactionParty(){}
+}
+class Receipt{
+  TransactionParty transactionParty;
+  String productsQR;
+  public Receipt(TransactionParty transactionParty, String productsQR){
+    this.transactionParty=transactionParty;
+    this.productsQR=productsQR;
+  }
+  public Receipt(){}
+}
+class GenerateReceipt{
+  public int verifyParty(Receipt r){
+    
+  }
+  public int calcGST(Receipt r){
+
+  } 
+}
+class Source{
+  public static void main(String[] args){
+    
+  }
+}
+---------------------------------------------------------------------------
